@@ -20,8 +20,6 @@ public class Employee {
     private double overtimeHours;
     private LocalDateTime punchIn;
     private LocalDateTime punchOut;
-    static double decimalTime = timeNow.getHour() + (timeNow.getMinute() / 60);
-    static DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
 
     public Employee(long employeeId, String name, String department, double payRate, double hoursWorked, double totalPay,
@@ -38,31 +36,37 @@ public class Employee {
         this.punchIn = punchIn;
         this.punchOut = punchOut;
     }
-    public Employee(long employeeId, String name, String department, double payRate){}
 
-    public  void punchIn(LocalDateTime time){
-       punchIn = time;
+    public Employee(long employeeId, String name, String department, double payRate) {
     }
-    public void punchIn(){
+
+    public void punchIn(LocalDateTime time) {
+        punchIn = time;
+    }
+
+    public void punchIn() {
         this.punchIn = punchIn;
     }
-    public void punchOut(LocalDateTime time){
+
+    public void punchOut(LocalDateTime time) {
         punchOut = time;
     }
-    public void punchOut(){
+
+    public void punchOut() {
         this.punchOut = punchOut;
     }
-    public void punchTimeCard() {
-       if(punchIn != null && punchOut != null){
-           Duration duration = Duration.between(punchIn,punchOut);
-           hoursWorked = (double) duration.toMinutes() / 60;
 
-       }
-       else{
-           hoursWorked = 0;
-       }
+    public void punchTimeCard() {
+        if (punchIn != null && punchOut != null) {
+            Duration duration = Duration.between(punchIn, punchOut);
+            hoursWorked = (double) duration.toMinutes() / 60;
+
+        } else {
+            hoursWorked = 0;
+        }
 
     }
+
     public long getEmployeeId() {
         return employeeId;
     }
@@ -138,29 +142,4 @@ public class Employee {
     public void setOvertimeHours(double overtimeHours) {
         this.overtimeHours = overtimeHours;
     }
-    /*public static void punchTimeCard() {
-        while (true) {
-            System.out.println("""
-                    Please choose one of the following.
-                    1) Punch In
-                    2) Punch Out
-                    3) Exit
-                    """);
-            String userChoice = myScanner.nextLine();
-            switch (userChoice) {
-                case "1":
-                    punchIn();
-                    break;
-                case "2":
-                    punchOut();
-                    break;
-                case "3":
-                    System.exit(0);
-                default:
-                    System.out.println("Choose 1 or 2 ");
-
-            }
-        }
-
-    }*/
 }

@@ -11,7 +11,7 @@ class RoomTest {
 
     @org.junit.jupiter.api.Test
     void checkedIn() {
-        Room avaibableRoom = new Room(2,139.00,false,false,true,false,true,true);
+        Room avaibableRoom = new Room(2, 139.00, false, false, true, false, true, true);
         assertTrue(avaibableRoom.isRoomAvailable());
         avaibableRoom.checkedIn();
         assertFalse(avaibableRoom.isRoomAvailable());
@@ -20,7 +20,7 @@ class RoomTest {
 
     @org.junit.jupiter.api.Test
     void checkingOut() {
-        Room checkedOutRoom = new Room(2,139.00,true,true,false,true,false,false);
+        Room checkedOutRoom = new Room(2, 139.00, true, true, false, true, false, false);
         assertFalse(checkedOutRoom.isRoomAvailable());
         assertTrue(checkedOutRoom.isRoomOccupied());
         checkedOutRoom.checkedOut();
@@ -30,7 +30,7 @@ class RoomTest {
 
     @org.junit.jupiter.api.Test
     void dirtyRoomCheckingOut() {
-        Room dirtyRoom = new Room(2,139.00,true,true,false,true,false,false);
+        Room dirtyRoom = new Room(2, 139.00, true, true, false, true, false, false);
         assertTrue(dirtyRoom.isRoomDirty());
         dirtyRoom.cleanRoom();
         assertTrue(dirtyRoom.cleanRoom());

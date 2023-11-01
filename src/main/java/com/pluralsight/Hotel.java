@@ -9,8 +9,12 @@ public class Hotel {
     private boolean isSuite;
     public int availableSuites;
     public int availableRooms;
-    public Hotel(String name, int numberOfSuites, int numberOfRooms){}
-    public Hotel(String name, int numberOfSuites, int numberOfRooms, int bookedSuites, int bookedRooms){}
+
+    public Hotel(String name, int numberOfSuites, int numberOfRooms) {
+    }
+
+    public Hotel(String name, int numberOfSuites, int numberOfRooms, int bookedSuites, int bookedRooms) {
+    }
 
     public String getName() {
         return name;
@@ -35,18 +39,19 @@ public class Hotel {
     public boolean isSuite() {
         return isSuite;
     }
+
     public int getAvailableSuites() {
         return availableSuites;
     }
+
     public int getAvailableRooms() {
         return availableRooms;
     }
 
-    public boolean bookRoom(int numberOfRooms, boolean isSuite, int availableRooms){
-        if(numberOfRooms > 0 && isSuite && availableRooms >0){
+    public boolean bookRoom(int numberOfRooms, boolean isSuite, int availableRooms) {
+        if (numberOfRooms > 0 && isSuite && availableRooms > 0) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
