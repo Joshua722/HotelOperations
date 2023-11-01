@@ -10,7 +10,8 @@ public class Room {
     private boolean checkedOut;
     private boolean cleanRoom;
 
-    public Room(int numberOfBeds, double roomPrice, boolean roomOccupied, boolean roomDirty, boolean roomAvailable,boolean checkedIn,boolean checkedOut,boolean cleanRoom) {
+    public Room(int numberOfBeds, double roomPrice, boolean roomOccupied, boolean roomDirty,
+                boolean roomAvailable,boolean checkedIn,boolean checkedOut,boolean cleanRoom) {
         this.numberOfBeds = numberOfBeds;
         this.roomPrice = roomPrice;
         this.roomOccupied = roomOccupied;
@@ -29,20 +30,22 @@ public class Room {
         roomOccupied = true;
         roomAvailable = false;
     }
-    public void isCheckedOut(){
+    public void checkedOut(){
         if(!roomDirty){
             roomDirty = false;
             roomOccupied = false;
         }
         else{
             cleanRoom();
-            isCheckedOut();
+            checkedOut();
         }
         roomAvailable = true;
     }
 
-    public void cleanRoom() {
+    public boolean cleanRoom() {
         roomDirty = false;
+        cleanRoom = true;
+        return true;
     }
 
     public double getRoomPrice() {

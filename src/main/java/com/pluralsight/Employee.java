@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.time.*;
@@ -17,12 +18,14 @@ public class Employee {
     private double totalHours;
     private double regularsHours;
     private double overtimeHours;
-    private double punchIn;
-    private double punchOut;
+    private LocalDateTime punchIn;
+    private LocalDateTime punchOut;
     static double decimalTime = timeNow.getHour() + (timeNow.getMinute() / 60);
+    static DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
 
-    public Employee(long employeeId, String name, String department, double payRate, double hoursWorked, double totalPay, double totalHours, double regularsHours, double overtimeHours, double punchIn, double punchOut) {
+    public Employee(long employeeId, String name, String department, double payRate, double hoursWorked, double totalPay,
+                    double totalHours, double regularsHours, double overtimeHours) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
@@ -35,39 +38,30 @@ public class Employee {
         this.punchIn = punchIn;
         this.punchOut = punchOut;
     }
+    public Employee(long employeeId, String name, String department, double payRate){}
 
-    public static void punchTimeCard() {
-        while (true) {
-            System.out.println("""
-                    Please choose one of the following.
-                    1) Check In
-                    2) Check Out
-                    3) Exit
-                    """);
-            String userChoice = myScanner.nextLine();
-            switch (userChoice) {
-                case "1":
-                    punchIn();
-                    break;
-                case "2":
-                    punchOut();
-                    break;
-                case "3":
-                    System.exit(0);
-                default:
-                    System.out.println("Choose 1 or 2 ");
-
-            }
-        }
-
+    public  void punchIn(LocalDateTime time){
+       punchIn = time;
     }
-    public static void punchIn(double overtimeHours){}
-    public static void punchIn(){
-        System.out.println("Welcome, you've clocked in at " + timeFormat.format(timeNow) + " " + decimalTime);
+    public void punchIn(){
+        this.punchIn = punchIn;
     }
-    public static void punchOut(double overtimeHours){}
-    public static void punchOut(){
-        System.out.println("Goodbye, you've clocked out at  " + timeFormat.format(timeNow) + " " + decimalTime);
+    public void punchOut(LocalDateTime time){
+        punchOut = time;
+    }
+    public void punchOut(){
+        this.punchOut = punchOut;
+    }
+    public void punchTimeCard() {
+       if(punchIn != null && punchOut != null){
+           Duration duration = Duration.between(punchIn,punchOut);
+           hoursWorked = (double) duration.toMinutes() / 60;
+
+       }
+       else{
+           hoursWorked = 0;
+       }
+
     }
     public long getEmployeeId() {
         return employeeId;
@@ -111,9 +105,9 @@ public class Employee {
 
     public double getTotalPay() {
         if (overtimeHours < 0) {
-            return regularsHours * payRate;
+            return hoursWorked * payRate;
         } else {
-            return (regularsHours * payRate) + (overtimeHours * payRate * 1.5);
+            return (hoursWorked * payRate) + (overtimeHours * payRate * 1.5);
         }
     }
 
@@ -144,4 +138,29 @@ public class Employee {
     public void setOvertimeHours(double overtimeHours) {
         this.overtimeHours = overtimeHours;
     }
+    /*public static void punchTimeCard() {
+        while (true) {
+            System.out.println("""
+                    Please choose one of the following.
+                    1) Punch In
+                    2) Punch Out
+                    3) Exit
+                    """);
+            String userChoice = myScanner.nextLine();
+            switch (userChoice) {
+                case "1":
+                    punchIn();
+                    break;
+                case "2":
+                    punchOut();
+                    break;
+                case "3":
+                    System.exit(0);
+                default:
+                    System.out.println("Choose 1 or 2 ");
+
+            }
+        }
+
+    }*/
 }
